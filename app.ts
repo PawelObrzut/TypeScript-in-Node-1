@@ -88,8 +88,10 @@ app.delete('/api/puppies/:id', (req: Request, res: Response) => {
   if (!puppy) {
     return res.status(404).send({message: 'Puppy not found'});
   }
-  puppies.splice(puppy.findIndex(puppy => puppy.id === Number(req.params.id), 1));
-
+  if (puppy) {
+    const index = puppies.findIndex(puppy => puppy.id === Number(req.params.id));
+    puppies.splice(index, 1);
+  }
   return res.status(204).end();
 });
 

@@ -37,4 +37,9 @@ describe('Testing api endpoints', () => {
     expect(res.statusCode).toEqual(204);
     expect(res.headers['location']).toEqual('/api/puppies/2');
   });
+
+  test('deletes from correct api endpoint', async () => {
+    const res = await request(app).delete('/api/puppies/2')
+    expect(res.statusCode).toEqual(204);
+  });
 });
