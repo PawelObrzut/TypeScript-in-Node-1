@@ -22,6 +22,7 @@
   "homepage": "https://github.com/appliedtechnology/addons-ts-lab-puppiesApi#readme",
   "dependencies": {
     "@types/uuid": "^9.0.0",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "uuid": "^9.0.0"
   },

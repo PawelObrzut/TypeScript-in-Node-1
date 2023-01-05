@@ -1,8 +1,11 @@
 import express = require('express');
 import { Request, Response, Application } from 'express';
 import { v4 as uuidv4 } from 'uuid';
+const cors = require('cors');
 
 const app: Application = express();
+const options = { origin: 'http://localhost:3000' }
+app.use(cors(options))
 
 interface IPuppy {
   id: number;
@@ -38,6 +41,30 @@ const puppies: IPuppy[] = [
   },
   {    
     id: 5,
+    breed: 'dog',
+    name: 'rex',
+    birthDate: '04/06/2018'
+  },
+  {    
+    id: 6,
+    breed: 'schnaucer',
+    name: 'feebie',
+    birthDate: '01/01/2023'
+  },
+  {    
+    id: 7,
+    breed: 'spaniel',
+    name: 'bobbie',
+    birthDate: '10/07/2019'
+  },
+  {    
+    id: 8,
+    breed: 'spaniel',
+    name: 'bobbie',
+    birthDate: '01/07/2019'
+  },
+  {    
+    id: 9,
     breed: 'dog',
     name: 'rex',
     birthDate: '04/06/2018'
