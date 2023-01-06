@@ -1,75 +1,13 @@
 import express = require('express');
 import { Request, Response, Application } from 'express';
 import { v4 as uuidv4 } from 'uuid';
+import { IPuppy } from './types';
+import { puppies } from './db';
 const cors = require('cors');
 
 const app: Application = express();
 const options = { origin: 'http://localhost:3000' }
 app.use(cors(options))
-
-interface IPuppy {
-  id: number;
-  breed: string;
-  name: string;
-  birthDate: string;
-}
-
-const puppies: IPuppy[] = [
-  {
-    id: 1,
-    breed: 'labrador',
-    name: 'pebble',
-    birthDate: '25/04/2020'
-  },
-  {    
-    id: 2,
-    breed: 'schnaucer',
-    name: 'feebie',
-    birthDate: '01/01/2023'
-  },
-  {    
-    id: 3,
-    breed: 'spaniel',
-    name: 'bobbie',
-    birthDate: '10/07/2019'
-  },
-  {    
-    id: 4,
-    breed: 'spaniel',
-    name: 'bobbie',
-    birthDate: '01/07/2019'
-  },
-  {    
-    id: 5,
-    breed: 'dog',
-    name: 'rex',
-    birthDate: '04/06/2018'
-  },
-  {    
-    id: 6,
-    breed: 'schnaucer',
-    name: 'feebie',
-    birthDate: '01/01/2023'
-  },
-  {    
-    id: 7,
-    breed: 'spaniel',
-    name: 'bobbie',
-    birthDate: '10/07/2019'
-  },
-  {    
-    id: 8,
-    breed: 'spaniel',
-    name: 'bobbie',
-    birthDate: '01/07/2019'
-  },
-  {    
-    id: 9,
-    breed: 'dog',
-    name: 'rex',
-    birthDate: '04/06/2018'
-  }
-] 
 
 app.use(express.json());
 
