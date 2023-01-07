@@ -14,7 +14,7 @@ describe('Testing api endpoints', () => {
     const res = await request(app).get('/api/puppies');
     expect(res.statusCode).toEqual(200);
     expect(res.body[0]).toHaveProperty('name');
-    expect(res.body).toHaveLength(5);
+    expect(res.body).toHaveLength(9);
   });
 
   test('responds with 404 for non existing endpoint', async () => {
@@ -27,7 +27,7 @@ describe('Testing api endpoints', () => {
 
   test('updates correct api endpoint', async () => {
     const res = await request(app)
-      .put('/api/puppies/2')
+      .put('/api/puppies/12cfc43d-232d-47a4-a604-cae916e3fa36')
       .set('Accept', 'application/json')
       .send({
         name: 'elmo',
@@ -35,11 +35,11 @@ describe('Testing api endpoints', () => {
         birthDate: '01/05/2020'
     });
     expect(res.statusCode).toEqual(204);
-    expect(res.headers['location']).toEqual('/api/puppies/2');
+    expect(res.headers['location']).toEqual('/api/puppies/12cfc43d-232d-47a4-a604-cae916e3fa36');
   });
 
   test('deletes from correct api endpoint', async () => {
-    const res = await request(app).delete('/api/puppies/2')
+    const res = await request(app).delete('/api/puppies/12cfc43d-232d-47a4-a604-cae916e3fa36')
     expect(res.statusCode).toEqual(204);
   });
 });

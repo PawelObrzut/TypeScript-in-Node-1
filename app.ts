@@ -20,7 +20,7 @@ app.get('/api/puppies', (_req: Request, res: Response) => {
 });
 
 app.get('/api/puppies/:id', (req: Request, res: Response) => {
-  const puppy: IPuppy | undefined = puppies.find(puppy => puppy.id === Number(req.params.id));
+  const puppy: IPuppy | undefined = puppies.find(puppy => puppy.id === req.params.id);
   if (!puppy) {
     return res.status(404).send({message: 'Puppy not found'});
   }
@@ -37,7 +37,7 @@ app.post('/api/puppies', (req: Request, res: Response) => {
 });
 
 app.put('/api/puppies/:id', (req: Request, res: Response) => {
-  const puppy: IPuppy | undefined = puppies.find(puppy => puppy.id === Number(req.params.id));
+  const puppy: IPuppy | undefined = puppies.find(puppy => puppy.id === req.params.id);
   if (!puppy) {
     return res.status(404).send({message: 'Puppy not found'});
   }
@@ -49,12 +49,12 @@ app.put('/api/puppies/:id', (req: Request, res: Response) => {
 });
 
 app.delete('/api/puppies/:id', (req: Request, res: Response) => {
-  const puppy: IPuppy | undefined = puppies.find(puppy => puppy.id === Number(req.params.id));
+  const puppy: IPuppy | undefined = puppies.find(puppy => puppy.id === req.params.id);
   if (!puppy) {
     return res.status(404).send({message: 'Puppy not found'});
   }
   if (puppy) {
-    const index = puppies.findIndex(puppy => puppy.id === Number(req.params.id));
+    const index = puppies.findIndex(puppy => puppy.id === req.params.id);
     puppies.splice(index, 1);
   }
   return res.status(204).end();

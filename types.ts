@@ -1,5 +1,5 @@
 export interface IPuppy {
-  id: number;
+  id: string;
   breed: string;
   name: string;
   birthDate: string;
