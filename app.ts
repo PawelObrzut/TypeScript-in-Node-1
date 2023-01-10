@@ -1,14 +1,15 @@
-import express = require('express');
 import { Request, Response, Application } from 'express';
 import { v4 as uuidv4 } from 'uuid';
+import express = require('express');
+const cors = require('cors');
+const fetch = require('node-fetch');
 import { IPuppy } from './types';
 import { puppies } from './db';
-const cors = require('cors');
 
 const app: Application = express();
 const options = { origin: 'http://localhost:3000' }
-app.use(cors(options))
 
+app.use(cors(options))
 app.use(express.json());
 
 app.get('/api/test', (_req: Request, res: Response) => {
@@ -27,12 +28,24 @@ app.get('/api/puppies/:id', (req: Request, res: Response) => {
   return res.status(200).json(puppy);
 });
 
-app.post('/api/puppies', (req: Request, res: Response) => {
+app.post('/api/puppies', async (req: Request, res: Response) => {
+  let url = ''
+  try {
+    url = await fetch(`https://api.unsplash.com/photos/random?query=${req.body.breed}&client_id=${process.env.API_KEY}`)
+      .then( (response: any) => response.json() )
+      .then( (data:any) => data.urls.regular );
+   } catch (error) {
+    url = await fetch(`https://api.unsplash.com/photos/random?query=cat&client_id=${process.env.API_KEY}`)
+      .then( (response: any) => response.json() )
+      .then( (data:any) => data.urls.regular );
+   }
+
   const newPuppy: IPuppy = {
     id: uuidv4(),
-    ...req.body
+    ...req.body,
+    url: url,
   }
-  puppies.push(newPuppy);
+  puppies.unshift(newPuppy);
   return res.status(201).json(newPuppy);
 });
 
