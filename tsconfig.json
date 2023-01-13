@@ -19,5 +19,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": false
-  }
+  },
+  "include": ["app.ts", "*.d.ts"],
+  "exclude": ["node_modules"]
 }

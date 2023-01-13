@@ -5,11 +5,12 @@ const cors = require('cors');
 const fetch = require('node-fetch');
 import { IPuppy } from './types';
 import { puppies } from './db';
+require('dotenv').config();
 
 const app: Application = express();
-const options = { origin: 'http://localhost:3000' }
+const options = { origin: 'http://localhost:3000' };
 
-app.use(cors(options))
+app.use(cors(options));
 app.use(express.json());
 
 app.get('/api/test', (_req: Request, res: Response) => {
@@ -30,14 +31,15 @@ app.get('/api/puppies/:id', (req: Request, res: Response) => {
 
 app.post('/api/puppies', async (req: Request, res: Response) => {
   let url = ''
+  if (!req.body.breed) {
+    req.body.breed = 'cat';
+  }
   try {
     url = await fetch(`https://api.unsplash.com/photos/random?query=${req.body.breed}&client_id=${process.env.API_KEY}`)
       .then( (response: any) => response.json() )
       .then( (data:any) => data.urls.regular );
    } catch (error) {
-    url = await fetch(`https://api.unsplash.com/photos/random?query=cat&client_id=${process.env.API_KEY}`)
-      .then( (response: any) => response.json() )
-      .then( (data:any) => data.urls.regular );
+      url = 'https://media.licdn.com/dms/image/C5612AQEPYce5KpNLyg/article-cover_image-shrink_720_1280/0/1551659700811?e=1678924800&v=beta&t=SwwpRDk2nez4mC4oBDGXdf8AtJhmu7ljFDj4i7dKtTs'
    }
 
   const newPuppy: IPuppy = {

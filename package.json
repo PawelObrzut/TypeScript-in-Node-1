@@ -23,6 +23,7 @@
   "dependencies": {
     "@types/uuid": "^9.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.17.3",
     "node-fetch": "^2.6.7",
     "unsplash-js": "^7.0.15",
